@@ -10,8 +10,8 @@ import (
 	"testing"
 
 	"github.com/Shyp/rest"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/test"
+	"rickover/models"
+	"rickover/test"
 )
 
 var u = &UnsafeBypassAuthorizer{}

@@ -4,8 +4,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/queued_jobs"
+	"rickover/models"
+	"rickover/models/queued_jobs"
 )
 
 // ArchiveStuckJobs marks as failed any queued jobs with an updated_at

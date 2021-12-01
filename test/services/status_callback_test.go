@@ -3,12 +3,12 @@ package services
 import (
 	"testing"
 
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/archived_jobs"
-	"github.com/Shyp/rickover/models/queued_jobs"
-	"github.com/Shyp/rickover/services"
-	"github.com/Shyp/rickover/test"
-	"github.com/Shyp/rickover/test/factory"
+	"rickover/models"
+	"rickover/models/archived_jobs"
+	"rickover/models/queued_jobs"
+	"rickover/services"
+	"rickover/test"
+	"rickover/test/factory"
 )
 
 func TestStatusCallbackInsertsArchivedRecordDeletesQueuedRecord(t *testing.T) {

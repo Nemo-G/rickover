@@ -11,11 +11,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/Shyp/go-simple-metrics"
-	"github.com/Shyp/rickover/config"
-	"github.com/Shyp/rickover/models/db"
-	"github.com/Shyp/rickover/server"
-	"github.com/Shyp/rickover/setup"
+	"rickover/config"
+	"rickover/models/db"
+	"rickover/server"
+	"rickover/setup"
+
 	"github.com/gorilla/handlers"
 )
 

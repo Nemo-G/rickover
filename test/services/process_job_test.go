@@ -9,16 +9,17 @@ import (
 	"testing"
 	"time"
 
+	"rickover/models"
+	"rickover/models/archived_jobs"
+	"rickover/models/jobs"
+	"rickover/models/queued_jobs"
+	"rickover/services"
+	"rickover/test"
+	"rickover/test/factory"
+
 	"github.com/Shyp/go-types"
 	"github.com/Shyp/rest"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/archived_jobs"
-	"github.com/Shyp/rickover/models/jobs"
-	"github.com/Shyp/rickover/models/queued_jobs"
-	"github.com/Shyp/rickover/services"
-	"github.com/Shyp/rickover/test"
-	"github.com/Shyp/rickover/test/factory"
-	"github.com/nu7hatch/gouuid"
+	uuid "github.com/nu7hatch/gouuid"
 )
 
 func TestAll(t *testing.T) {

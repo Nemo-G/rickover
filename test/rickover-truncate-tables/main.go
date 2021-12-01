@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 
-	"github.com/Shyp/rickover/models/db"
-	"github.com/Shyp/rickover/setup"
-	"github.com/Shyp/rickover/test"
+	"rickover/models/db"
+	"rickover/setup"
+	"rickover/test"
 )
 
 func main() {

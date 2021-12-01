@@ -6,7 +6,7 @@ ifdef DATABASE_URL
 	DATABASE_URL := $(DATABASE_URL)
 	TEST_DATABASE_URL := $(DATABASE_URL)
 else
-	DATABASE_URL := 'postgres://rickover@localhost:5432/rickover?sslmode=disable&timezone=UTC'
+	DATABASE_URL := 'postgres://rickover:rickover@localhost:5432/rickover?sslmode=disable&timezone=UTC'
 	TEST_DATABASE_URL := 'postgres://rickover@localhost:5432/rickover_test?sslmode=disable&timezone=UTC'
 endif
 
@@ -21,12 +21,9 @@ $(TRUNCATE_TABLES):
 	go install ./test/rickover-truncate-tables
 
 test-install:
-	-createuser rickover --superuser --createrole --createdb --inherit
-	-createdb rickover --owner=rickover
-	-createdb rickover_test --owner=rickover
-
-lint:
-	go list ./... | grep -v vendor | xargs go vet
+	-createuser -U postgres --superuser --createrole --createdb --inherit rickover
+	-createdb -U postgres --owner=rickover rickover
+	-createdb -U postgres --owner=rickover rickover_test
 
 build:
 	go build ./...
@@ -65,11 +62,10 @@ release: race-test | $(BUMP_VERSION)
 	git push origin master --tags
 
 GOOSE:
-	go install github.com/pressly/goose/v3/cmd/goose
+	go get -u github.com/pressly/goose/v3/cmd/goose
 
 migrate: | $(GOOSE)
-	$(GOOSE) --env=development up
-	$(GOOSE) --env=test up
+	$(GOOSE) --dir db/migrations postgres $(DATABASE_URL) up
 
 $(BENCHSTAT):
 	go get -u golang.org/x/perf/cmd/benchstat

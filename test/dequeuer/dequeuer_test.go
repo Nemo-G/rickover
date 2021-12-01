@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Shyp/rickover/dequeuer"
-	"github.com/Shyp/rickover/test"
-	"github.com/Shyp/rickover/test/factory"
+	"rickover/dequeuer"
+	"rickover/test"
+	"rickover/test/factory"
 )
 
 func TestAll(t *testing.T) {

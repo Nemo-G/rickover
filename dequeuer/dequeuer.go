@@ -9,11 +9,12 @@ import (
 	"sync"
 	"time"
 
+	"metrics"
+	"rickover/models"
+	"rickover/models/jobs"
+	"rickover/models/queued_jobs"
+
 	"github.com/Shyp/go-dberror"
-	"github.com/Shyp/go-simple-metrics"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/jobs"
-	"github.com/Shyp/rickover/models/queued_jobs"
 	"golang.org/x/sync/errgroup"
 )
 

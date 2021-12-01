@@ -9,9 +9,9 @@ import (
 	"time"
 
 	types "github.com/Shyp/go-types"
-	"github.com/Shyp/rickover/server"
-	"github.com/Shyp/rickover/test"
-	"github.com/Shyp/rickover/test/factory"
+	"rickover/server"
+	"rickover/test"
+	"rickover/test/factory"
 )
 
 func BenchmarkEnqueue(b *testing.B) {

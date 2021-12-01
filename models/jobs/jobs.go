@@ -7,9 +7,10 @@ import (
 	"fmt"
 	"time"
 
+	"rickover/models"
+	"rickover/models/db"
+
 	dberror "github.com/Shyp/go-dberror"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/db"
 	"github.com/lib/pq"
 )
 

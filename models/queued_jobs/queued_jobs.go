@@ -8,10 +8,11 @@ import (
 	"fmt"
 	"time"
 
+	"rickover/models"
+	"rickover/models/db"
+
 	"github.com/Shyp/go-dberror"
 	"github.com/Shyp/go-types"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/db"
 )
 
 const Prefix = "job_"

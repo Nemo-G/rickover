@@ -9,14 +9,15 @@ import (
 	"testing"
 	"time"
 
+	"rickover/models"
+	"rickover/models/archived_jobs"
+	"rickover/models/jobs"
+	"rickover/models/queued_jobs"
+	"rickover/server"
+	"rickover/test"
+	"rickover/test/factory"
+
 	"github.com/Shyp/go-types"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/archived_jobs"
-	"github.com/Shyp/rickover/models/jobs"
-	"github.com/Shyp/rickover/models/queued_jobs"
-	"github.com/Shyp/rickover/server"
-	"github.com/Shyp/rickover/test"
-	"github.com/Shyp/rickover/test/factory"
 )
 
 var u = &server.UnsafeBypassAuthorizer{}

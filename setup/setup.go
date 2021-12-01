@@ -8,12 +8,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Shyp/go-simple-metrics"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/archived_jobs"
-	"github.com/Shyp/rickover/models/db"
-	"github.com/Shyp/rickover/models/jobs"
-	"github.com/Shyp/rickover/models/queued_jobs"
+	"metrics"
+	"rickover/models"
+	"rickover/models/archived_jobs"
+	"rickover/models/db"
+	"rickover/models/jobs"
+	"rickover/models/queued_jobs"
 )
 
 var mu sync.Mutex

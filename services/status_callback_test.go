@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Shyp/rickover/test"
+	"rickover/test"
 )
 
 func TestRunAfter(t *testing.T) {

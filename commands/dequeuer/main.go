@@ -10,12 +10,13 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Shyp/go-simple-metrics"
-	"github.com/Shyp/rickover/config"
-	"github.com/Shyp/rickover/dequeuer"
-	"github.com/Shyp/rickover/models/db"
-	"github.com/Shyp/rickover/services"
-	"github.com/Shyp/rickover/setup"
+	"metrics"
+	"rickover/config"
+	"rickover/dequeuer"
+	"rickover/models/db"
+	"rickover/services"
+	"rickover/setup"
+
 	"golang.org/x/sync/errgroup"
 )
 

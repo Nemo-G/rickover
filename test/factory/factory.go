@@ -7,16 +7,17 @@ import (
 	"testing"
 	"time"
 
+	"rickover/downstream"
+	"rickover/models"
+	"rickover/models/archived_jobs"
+	"rickover/models/jobs"
+	"rickover/models/queued_jobs"
+	"rickover/services"
+	"rickover/test"
+
 	"github.com/Shyp/go-dberror"
 	"github.com/Shyp/go-types"
-	"github.com/Shyp/rickover/downstream"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/archived_jobs"
-	"github.com/Shyp/rickover/models/jobs"
-	"github.com/Shyp/rickover/models/queued_jobs"
-	"github.com/Shyp/rickover/services"
-	"github.com/Shyp/rickover/test"
-	"github.com/nu7hatch/gouuid"
+	uuid "github.com/nu7hatch/gouuid"
 )
 
 var EmptyData = json.RawMessage([]byte("{}"))

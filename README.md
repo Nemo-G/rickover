@@ -139,7 +139,7 @@ type Authorizer interface {
 Then, get a http.Handler with your authorizer by calling
 
 ```go
-import "github.com/Shyp/rickover/server"
+import "rickover/server"
 
 handler := server.Get(authorizer)
 http.ListenAndServe(":9090", handler)
@@ -169,8 +169,8 @@ which makes an API request to a downstream service. The default client is
 and password for the downstream service:
 
 ```go
-import "github.com/Shyp/rickover/dequeuer"
-import "github.com/Shyp/rickover/services"
+import "rickover/dequeuer"
+import "rickover/services"
 
 func main() {
 	password := "hymanrickover"

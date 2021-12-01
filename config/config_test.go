@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/Shyp/rickover/test"
+	"rickover/test"
 )
 
 func TestVersionString(t *testing.T) {

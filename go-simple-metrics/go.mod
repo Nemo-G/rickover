@@ -1,6 +1,6 @@
-module go-simple-metrics
+module metrics
 
-go 1.15
+go 1.16
 
 require (
 	github.com/Shyp/go-debug v2.0.0+incompatible

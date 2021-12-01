@@ -6,11 +6,11 @@ import (
 	"time"
 
 	"github.com/Shyp/go-dberror"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/archived_jobs"
-	"github.com/Shyp/rickover/models/queued_jobs"
-	"github.com/Shyp/rickover/test"
-	"github.com/Shyp/rickover/test/factory"
+	"rickover/models"
+	"rickover/models/archived_jobs"
+	"rickover/models/queued_jobs"
+	"rickover/test"
+	"rickover/test/factory"
 )
 
 var sampleJob = models.Job{

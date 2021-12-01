@@ -5,10 +5,11 @@ import (
 	"testing"
 	"time"
 
+	"rickover/models"
+	"rickover/models/jobs"
+	"rickover/test"
+
 	types "github.com/Shyp/go-types"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/jobs"
-	"github.com/Shyp/rickover/test"
 )
 
 func TestAll(t *testing.T) {

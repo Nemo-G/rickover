@@ -3,7 +3,7 @@ package factory
 import (
 	"testing"
 
-	"github.com/Shyp/rickover/test"
+	"rickover/test"
 )
 
 func ExampleRandomId() {

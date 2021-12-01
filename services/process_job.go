@@ -9,11 +9,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Shyp/go-simple-metrics"
+	"metrics"
+	"rickover/downstream"
+	"rickover/models"
+	"rickover/models/queued_jobs"
+
 	"github.com/Shyp/rest"
-	"github.com/Shyp/rickover/downstream"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/queued_jobs"
 )
 
 // 10ms * 2^10 ~ 10 seconds between attempts

@@ -5,11 +5,12 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Shyp/go-simple-metrics"
+	"metrics"
+	"rickover/models"
+	"rickover/models/queued_jobs"
+	"rickover/services"
+
 	"github.com/Shyp/rest"
-	"github.com/Shyp/rickover/models"
-	"github.com/Shyp/rickover/models/queued_jobs"
-	"github.com/Shyp/rickover/services"
 )
 
 // jobStatusUpdater satisfies the Handler interface.
