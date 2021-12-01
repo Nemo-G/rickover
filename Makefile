@@ -65,7 +65,7 @@ release: race-test | $(BUMP_VERSION)
 	git push origin master --tags
 
 GOOSE:
-	go get -u github.com/kevinburke/goose/cmd/goose
+	go install github.com/pressly/goose/v3/cmd/goose
 
 migrate: | $(GOOSE)
 	$(GOOSE) --env=development up
