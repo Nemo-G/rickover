@@ -75,7 +75,7 @@ func Create(id types.PrefixUUID, name string, status models.JobStatus, attempt u
 // Get returns the archived job with the given id, or sql.ErrNoRows if it's
 // not present.
 func Get(id types.PrefixUUID) (*models.ArchivedJob, error) {
-	if id.UUID == nil {
+	if id.UUID == types.NilUUID.UUID {
 		return nil, errors.New("Invalid id")
 	}
 	aj := new(models.ArchivedJob)

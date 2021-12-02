@@ -24,7 +24,7 @@ import (
 func configure() (http.Handler, error) {
 	dbConns, err := config.GetInt("PG_SERVER_POOL_SIZE")
 	if err != nil {
-		log.Printf("Error getting database pool size: %s. Defaulting to 10", err)
+		log.Printf("PG_SERVER_POOL_SIZE error: %s. Defaulting to 10", err)
 		dbConns = 10
 	}
 
@@ -50,8 +50,8 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "9090"
+		port = "80"
 	}
 	log.Printf("Listening on port %s\n", port)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), handlers.LoggingHandler(os.Stdout, s)))
+	http.ListenAndServe(fmt.Sprintf(":%s", port), handlers.LoggingHandler(os.Stdout, s))
 }

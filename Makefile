@@ -1,13 +1,9 @@
-.PHONY: test race-test
-
-SHELL = /bin/bash -o pipefail
-
 ifdef DATABASE_URL
 	DATABASE_URL := $(DATABASE_URL)
 	TEST_DATABASE_URL := $(DATABASE_URL)
 else
-	DATABASE_URL := 'postgres://rickover:rickover@localhost:5432/rickover?sslmode=disable&timezone=UTC'
-	TEST_DATABASE_URL := 'postgres://rickover@localhost:5432/rickover_test?sslmode=disable&timezone=UTC'
+	DATABASE_URL := 'postgres://rickover:rickover@localhost:15432/rickover?sslmode=disable&timezone=UTC'
+	TEST_DATABASE_URL := 'postgres://rickover@localhost:15432/rickover_test?sslmode=disable&timezone=UTC'
 endif
 
 BENCHSTAT := $(GOPATH)/bin/benchstat
@@ -19,7 +15,7 @@ TRUNCATE_TABLES := $(GOPATH)/bin/rickover-truncate-tables
 # Just run it every time, we could get fancy with find() tricks, but eh.
 $(TRUNCATE_TABLES):
 	go install ./test/rickover-truncate-tables
-
+.PHONY: test race-test
 test-install:
 	-createuser -U postgres --superuser --createrole --createdb --inherit rickover
 	-createdb -U postgres --owner=rickover rickover
@@ -47,12 +43,6 @@ race-test: race-testonly truncate-test
 
 test: testonly truncate-test
 
-serve:
-	@DATABASE_URL=$(DATABASE_URL) go run commands/server/main.go
-
-dequeue:
-	@DATABASE_URL=$(DATABASE_URL) go run commands/dequeuer/main.go
-
 $(BUMP_VERSION):
 	go get -u github.com/Shyp/bump_version
 
@@ -62,13 +52,31 @@ release: race-test | $(BUMP_VERSION)
 	git push origin master --tags
 
 GOOSE:
-	go get -u github.com/pressly/goose/v3/cmd/goose
+	go install github.com/pressly/goose/v3/cmd/goose@latest
 
-migrate: | $(GOOSE)
-	$(GOOSE) --dir db/migrations postgres $(DATABASE_URL) up
+
+.PHONY: migrate
+migrate:
+	$(GOOSE) --dir db/migrations postgres "$$DATABASE_URL" up
 
 $(BENCHSTAT):
 	go get -u golang.org/x/perf/cmd/benchstat
 
 bench: | $(BENCHSTAT)
 	tmp=$$(mktemp); go list ./... | grep -v vendor | xargs go test -p=1 -benchtime=2s -bench=. -run='^$$' > "$$tmp" 2>&1 && $(BENCHSTAT) "$$tmp"
+
+.PHONY: compose-up
+compose-up:
+	@docker-compose up -d
+
+.PHONY: compose-down
+compose-down:
+	@docker-compose down -v
+
+.PHONY: server
+server:
+	@DATABASE_URL=$(DATABASE_URL) go run commands/server/main.go
+
+.PHONY: worker
+worker:
+	@DATABASE_URL=$(DATABASE_URL) go run commands/dequeuer/main.go

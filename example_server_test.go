@@ -11,6 +11,7 @@ import (
 	"os"
 	"time"
 
+	"metrics"
 	"rickover/config"
 	"rickover/models/db"
 	"rickover/server"
@@ -25,7 +26,7 @@ func init() {
 	var err error
 	serverDbConns, err = config.GetInt("PG_SERVER_POOL_SIZE")
 	if err != nil {
-		log.Printf("Error getting database pool size: %s. Defaulting to 10", err)
+		log.Printf("PG_SERVER_POOL_SIZE error: %s. Set to default 10", err)
 		serverDbConns = 10
 	}
 

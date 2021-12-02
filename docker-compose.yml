@@ -1,0 +1,32 @@
+version: '3'
+
+volumes:
+  postgres-rickover:
+
+    null
+services:
+  postgres:
+    container_name: rickover-db # hostname
+    image: postgres:11-alpine
+    restart: always
+    ports:
+      - "15432:5432" # avoid local port conflict
+    environment:
+      - POSTGRES_PASSWORD=rickover
+      - POSTGRES_USER=rickover
+      - POSTGRES_DB=rickover
+    volumes:
+      - "postgres-rickover:/var/lib/postgresql/data"
+    command: [ "-c", "max_connections=10000" ]
+
+  rickover-server:
+    depends_on:
+      - postgres
+    container_name: rickover-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "18080:80"
+    env_file:
+      - ./.env

@@ -20,6 +20,7 @@ import (
 	"syscall"
 	"time"
 
+	"metrics"
 	"rickover/config"
 	"rickover/dequeuer"
 	"rickover/models/db"

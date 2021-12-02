@@ -430,11 +430,7 @@ func (j *jobEnqueuer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	//
 	// Clients *must not* use random_id, they must generate their own UUID's.
 	if idStr == "random_id" {
-		id, err = types.GenerateUUID("job_")
-		if err != nil {
-			writeServerError(w, r, err)
-			return
-		}
+		id = types.GenerateUUID("job_")
 	} else {
 		var wroteResponse bool
 		id, wroteResponse = getId(w, r, idStr)

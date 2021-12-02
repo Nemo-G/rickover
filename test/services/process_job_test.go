@@ -19,7 +19,7 @@ import (
 
 	"github.com/Shyp/go-types"
 	"github.com/Shyp/rest"
-	uuid "github.com/nu7hatch/gouuid"
+	uuid "github.com/kevinburke/go.uuid"
 )
 
 func TestAll(t *testing.T) {
@@ -83,7 +83,7 @@ func TestWorkerRetriesJSON503(t *testing.T) {
 	_, err := jobs.Create(factory.SampleJob)
 	test.AssertNotError(t, err, "")
 
-	id, _ := uuid.NewV4()
+	id := uuid.NewV4()
 	pid, _ := types.NewPrefixUUID(fmt.Sprintf("job_%s", id))
 
 	var data json.RawMessage
