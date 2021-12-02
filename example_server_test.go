@@ -37,9 +37,7 @@ func init() {
 }
 
 func Example_server() {
-	if err := setup.DB(db.DefaultConnection, serverDbConns); err != nil {
-		log.Fatal(err)
-	}
+	setup.MustSetupDB(db.DefaultConnection, serverDbConns)
 
 	metrics.Start("web")
 

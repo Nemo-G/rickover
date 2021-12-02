@@ -9,9 +9,7 @@ import (
 )
 
 func main() {
-	if err := setup.DB(db.DefaultConnection, 1); err != nil {
-		log.Fatal(err)
-	}
+	setup.MustSetupDB(db.DefaultConnection, 1)
 	if err := test.TruncateTables(nil); err != nil {
 		log.Fatal(err)
 	}

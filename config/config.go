@@ -2,7 +2,6 @@
 package config
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"net/url"
@@ -12,6 +11,14 @@ import (
 
 const Version = "1.1"
 
+func init() {
+	// set default downstream url if no env present
+	if downstreamUrl := os.Getenv("DOWNSTREAM_URL"); downstreamUrl == "" {
+		log.Println("No Env DOWNSTREAM_URL configured. Defaulting to http://localhost:9090")
+		os.Setenv("DOWNSTREAM_URL", "http://localhost:9090")
+	}
+}
+
 // GetInt loads the environment variable varName, converts it to an integer,
 // and returns that integer or an error.
 func GetInt(varName string) (int, error) {
@@ -19,14 +26,14 @@ func GetInt(varName string) (int, error) {
 	return strconv.Atoi(envVar)
 }
 
-func GetURLOrBail(urlEnvVar string) *url.URL {
-	downstreamUrl := os.Getenv(urlEnvVar)
-	if downstreamUrl == "" {
-		log.Fatal(fmt.Errorf("No downstream URL configured. Please set %s", urlEnvVar))
+func MustGetURL(urlEnvVar string) *url.URL {
+	urlFromEnv := os.Getenv(urlEnvVar)
+	if urlFromEnv == "" {
+		log.Fatalf("No Env %s configured.", urlEnvVar)
 	}
-	parsedUrl, err := url.Parse(downstreamUrl)
+	parsedUrl, err := url.Parse(urlFromEnv)
 	if err != nil {
-		log.Fatalf("Invalid downstream url: %s. %s\n", downstreamUrl, err.Error())
+		log.Fatalf("Invalid url: %s. %s\n", urlFromEnv, err.Error())
 	}
 	return parsedUrl
 }

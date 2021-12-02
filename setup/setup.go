@@ -101,6 +101,12 @@ func DB(connector db.Connector, dbConns int) error {
 	return PrepareAll()
 }
 
+func MustSetupDB(connector db.Connector, dbConns int) {
+	if err := DB(connector, dbConns); err != nil {
+		panic(err)
+	}
+}
+
 func PrepareAll() error {
 	if err := jobs.Setup(); err != nil {
 		return err

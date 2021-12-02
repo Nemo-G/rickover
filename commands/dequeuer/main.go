@@ -29,7 +29,7 @@ func checkError(err error) {
 func main() {
 	dbConns, err := config.GetInt("PG_WORKER_POOL_SIZE")
 	if err != nil {
-		log.Printf("Error getting database pool size: %s. Defaulting to 20", err)
+		log.Printf("No PG_WORKER_POOL_SIZE configured: %s. Defaulting to 20", err)
 		dbConns = 20
 	}
 
@@ -60,7 +60,7 @@ func main() {
 		log.Printf("No DOWNSTREAM_WORKER_AUTH configured, setting an empty password for auth")
 	}
 
-	parsedUrl := config.GetURLOrBail("DOWNSTREAM_URL")
+	parsedUrl := config.MustGetURL("DOWNSTREAM_URL")
 	jp := services.NewJobProcessor(parsedUrl.String(), downstreamPassword)
 
 	// This creates a pool of dequeuers and starts them.

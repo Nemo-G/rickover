@@ -46,9 +46,7 @@ func init() {
 }
 
 func Example_dequeuer() {
-	if err := setup.DB(db.DefaultConnection, dbConns); err != nil {
-		log.Fatal(err)
-	}
+	setup.MustSetupDB(db.DefaultConnection, dbConns)
 
 	metrics.Start("worker")
 
@@ -60,7 +58,7 @@ func Example_dequeuer() {
 	// 7 minutes, and mark them as failed.
 	go services.WatchStuckJobs(1*time.Minute, 7*time.Minute)
 
-	downstreamUrl = config.GetURLOrBail("DOWNSTREAM_URL").String()
+	downstreamUrl = config.MustGetURL("DOWNSTREAM_URL").String()
 	jp := services.NewJobProcessor(downstreamUrl, downstreamPassword)
 
 	// CreatePools will read all job types out of the jobs table, then start

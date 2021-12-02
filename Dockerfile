@@ -19,4 +19,3 @@ COPY . /app
 RUN go mod tidy
 
 RUN make build
-CMD ["./start-server.sh"]

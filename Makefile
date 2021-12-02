@@ -73,10 +73,10 @@ compose-up:
 compose-down:
 	@docker-compose down -v
 
-.PHONY: server
+.PHONY: build
 server:
 	@DATABASE_URL=$(DATABASE_URL) go run commands/server/main.go
 
-.PHONY: worker
+.PHONY: build
 worker:
 	@DATABASE_URL=$(DATABASE_URL) go run commands/dequeuer/main.go

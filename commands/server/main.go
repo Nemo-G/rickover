@@ -21,37 +21,29 @@ import (
 	"github.com/gorilla/handlers"
 )
 
-func configure() (http.Handler, error) {
+func main() {
 	dbConns, err := config.GetInt("PG_SERVER_POOL_SIZE")
 	if err != nil {
-		log.Printf("PG_SERVER_POOL_SIZE error: %s. Defaulting to 10", err)
+		log.Printf("No PG_SERVER_POOL_SIZE configured: %s. Defaulting to 10", err)
 		dbConns = 10
 	}
-
-	if err = setup.DB(db.DefaultConnection, dbConns); err != nil {
-		return nil, err
-	}
+	setup.MustSetupDB(db.DefaultConnection, dbConns)
 
 	metrics.Namespace = "rickover.server"
 	metrics.Start("web")
-
 	go setup.MeasureActiveQueries(5 * time.Second)
-
-	// If you run this in production, change this user.
-	server.AddUser("test", "hymanrickover")
-	return server.Get(server.DefaultAuthorizer), nil
-}
-
-func main() {
-	s, err := configure()
-	if err != nil {
-		log.Fatal(err)
-	}
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "80"
+		port = "9090"
 	}
+
+	// test acount only work for non production env
+	if prod := os.Getenv("Production"); prod != "" {
+		server.AddUser("test", "test")
+	}
+	httpServer := server.Get(server.DefaultAuthorizer)
+
 	log.Printf("Listening on port %s\n", port)
-	http.ListenAndServe(fmt.Sprintf(":%s", port), handlers.LoggingHandler(os.Stdout, s))
+	http.ListenAndServe(fmt.Sprintf(":%s", port), handlers.LoggingHandler(os.Stdout, httpServer))
 }

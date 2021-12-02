@@ -14,9 +14,7 @@ func SetUp(t testing.TB) {
 	if os.Getenv("DATABASE_URL") == "" {
 		os.Setenv("DATABASE_URL", "postgres://rickover@localhost:5432/rickover_test?sslmode=disable&timezone=UTC")
 	}
-	if err := setup.DB(db.DefaultConnection, 10); err != nil {
-		t.Fatal(err)
-	}
+	setup.MustSetupDB(db.DefaultConnection, 10)
 }
 
 // TruncateTables deletes all records from the database.

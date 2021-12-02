@@ -17,7 +17,6 @@ services:
       - POSTGRES_DB=rickover
     volumes:
       - "postgres-rickover:/var/lib/postgresql/data"
-    command: [ "-c", "max_connections=10000" ]
 
   rickover-server:
     depends_on:
@@ -27,6 +26,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "18080:80"
+      - "9090:80"
     env_file:
       - ./.env
+    tty: true
